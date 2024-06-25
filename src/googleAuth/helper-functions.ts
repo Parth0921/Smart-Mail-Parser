@@ -64,6 +64,16 @@ export const getFormattedMessages = (messages: gmail_v1.Schema$Message[]) => {
 
     const snippet = message.snippet;
     const parts = message.payload.parts;
+    const senderObject = message.payload.headers?.find(
+      (header) => header.name?.toLowerCase() === "from"
+    );
+    let sender = senderObject?.value;
+
+    if (sender) {
+      const regex = `(?<=<)(.*)(?=>)`;
+      const reg = new RegExp(regex, "g");
+      sender = sender.match(reg)?.join() || sender;
+    }
 
     let body = "";
 
@@ -89,6 +99,7 @@ export const getFormattedMessages = (messages: gmail_v1.Schema$Message[]) => {
       threadId: message.threadId,
       snippet: snippet,
       body: body,
+      sender,
     };
   });
 

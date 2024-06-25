@@ -3,6 +3,7 @@ type mailObjectType = {
   id: string;
   threadId: string;
   snippet: string;
+  sender: string;
   label?: string;
   reply?: string;
 };
