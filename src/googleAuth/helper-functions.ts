@@ -14,7 +14,7 @@ export const getMessageIds = async () => {
   const gmail = google.gmail({ version: "v1", auth: oauth2Client });
   const res = await gmail.users.messages.list({
     userId: "me",
-    maxResults: 5,
+    maxResults: 2,
   });
   const messageIds = res.data.messages;
   if (!messageIds) {
@@ -100,7 +100,7 @@ export const convertHtmlToText = (
 ) => {
   const convertedMessagesToPlainText = formattedMessages.map((message) => {
     const body = message.body;
-    const plainTextFromBody = htmlToText(body);
+    const plainTextFromBody = htmlToText(body, { wordwrap: 130 });
     return {
       ...message,
       body: plainTextFromBody,

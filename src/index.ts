@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import googleAuthRouter from "./googleAuth/auth.js";
+import googleAuthRouter from "./googleAuth/auth-route.js";
+import geminiRouter from "./geminiGPT/gemini-route.js";
 
 const app = express();
 const port = 3001;
@@ -9,7 +10,8 @@ const port = 3001;
 app.use(cors());
 
 // routes
-app.use("/api", googleAuthRouter);
+app.use("/api/auth", googleAuthRouter);
+app.use("/api/gemini", geminiRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Hello app is running");

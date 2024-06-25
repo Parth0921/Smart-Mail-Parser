@@ -29,6 +29,7 @@
     "start": "nodemon --exec npx tsx ./src/index.ts"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.13.0",
     "@types/cors": "^2.8.17",
     "@types/html-to-text": "^9.0.4",
     "cors": "^2.8.5",
