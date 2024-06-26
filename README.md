@@ -36,7 +36,7 @@ http://localhost:3001/api/auth/google/send-reply
 1. Typescript
 2. Express
 3. GoogleAPIs
-4. Google-generative-AI
+4. Google-generative-AIc
 
 #### To set-up locally
 
@@ -67,4 +67,10 @@ Save this as this is the link that we would open to authenticate our user
 
 4. Head over to the auth URL and authenticate the google account providing necessary permissions for email.
 
-5. Query the endpoint for getting all mails, generating labels and reply, and send them.
+5. Run the command
+
+```
+npm start
+```
+
+6. Query the endpoint for getting all mails, generating labels and reply, and send them.
