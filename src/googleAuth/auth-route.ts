@@ -5,7 +5,6 @@ import {
   getMailFromGmail,
 } from "./get-auth-url.js";
 import emailParser from "../Model/email-parser.js";
-import EmailParserContainer from "../Model/email-container.js";
 import emailParserContainer from "../Model/email-container.js";
 
 const router = express.Router();

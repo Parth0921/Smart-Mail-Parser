@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import googleAuthRouter from "./googleAuth/auth-route.js";
 import geminiRouter from "./geminiGPT/gemini-route.js";
+import { addJobs } from "./queue/config.js";
 
 const app = express();
 const port = 3001;
