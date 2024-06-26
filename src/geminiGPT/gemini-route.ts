@@ -1,11 +1,15 @@
 import express, { Request, Response } from "express";
-import { getPromptResult } from "./prompt.js";
+import emailParserContainer from "../Model/email-container.js";
 
 const router = express.Router();
 
-router.get("/get-result", async (req: Request, res: Response) => {
-  const result = await getPromptResult();
+const getCategory = async () => {
+  const result = await emailParserContainer.getAllCategoryAndReply();
+  return result;
+};
 
+router.get("/get-result", async (req: Request, res: Response) => {
+  const result = await getCategory();
   res.status(200).send(result);
 });
 

@@ -1,4 +1,8 @@
-type mailObjectType = {
+import { generatePrompt } from "../geminiGPT/prompt-generator.js";
+import { getPromptResult } from "../geminiGPT/prompt.js";
+import { sendEmail } from "../googleAuth/helper-functions.js";
+
+export type mailObjectType = {
   body: string;
   id: string;
   threadId: string;
@@ -9,16 +13,30 @@ type mailObjectType = {
 };
 
 class EmailParser {
-  mails: mailObjectType[];
-  constructor() {
-    this.mails = [];
+  mail: mailObjectType;
+  constructor(mail: mailObjectType) {
+    this.mail = mail;
   }
 
-  addMail(mail: mailObjectType) {
-    this.mails.push(mail);
-    console.log(mail);
+  generatePromptFromBody() {
+    const prompt = generatePrompt(this.mail.body);
+    return prompt;
+  }
+
+  async getCategoryAndReply() {
+    const prompt = this.generatePromptFromBody();
+    const result = await getPromptResult(prompt);
+    if (result.category !== "No Category Found") {
+      this.mail.label = result.category;
+    }
+    if (result.reply !== "No Reply Found") {
+      this.mail.reply = result.reply;
+    }
+  }
+
+  async sendReplyMail() {
+    await sendEmail(this);
   }
 }
 
-const emailParser = new EmailParser();
-export default emailParser;
+export default EmailParser;
